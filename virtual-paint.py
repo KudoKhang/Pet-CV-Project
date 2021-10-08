@@ -26,7 +26,7 @@ def findColor(img, mycolors, myColorValues):
         if x!=0 and y!=0:
             newPoints.append([x, y, count])
         count +=1
-        cv2.imshow(str(color[0]), mask)
+        # cv2.imshow(str(color[0]), mask)
     return newPoints
 
 def getContours(img):
@@ -49,13 +49,13 @@ def drawOnCanvas(myPoints, myColorValues):
 while True:
     success, img = cap.read()
     imgResult = img.copy()
-    myPoints = findColor(img, myColors, myColorValues)
+    newPoints = findColor(img, myColors,myColorValues)
     if len(newPoints)!=0:
         for newP in newPoints:
             myPoints.append(newP)
     if len(myPoints)!=0:
-        drawOnCanvas(myPoint, myColorValues)
-
-    cv2.imshow("Video", imgResult)
-    if cv2.waitKey(1) & 0xFF == ord("q"):
+        drawOnCanvas(myPoints,myColorValues)
+ 
+    cv2.imshow("Result", imgResult)
+    if cv2.waitKey(1) and 0xFF == ord('q'):
         break
